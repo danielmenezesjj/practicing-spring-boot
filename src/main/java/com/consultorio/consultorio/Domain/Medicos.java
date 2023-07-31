@@ -1,4 +1,4 @@
-package Domain;
+package com.consultorio.consultorio.Domain;
 
 
 import jakarta.persistence.*;
@@ -19,9 +19,14 @@ public class Medicos {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_medico;
     private String nome;
-    private String cpf;
-    private String telefone;
-    private String endereco;
     private String especialidade;
+    private String cpf;
+    private String dt_nascimento;
+    private String rg;
+    private String naturalidade;
+    private String celular;
+    private String email;
+    private String endereco;
+
 
 }
