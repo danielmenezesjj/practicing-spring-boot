@@ -1,4 +1,4 @@
 package com.consultorio.consultorio.Dto;
 
-public record TipoUsuarioDTO(String name) {
+public record TipoUsuarioDTO(String nome) {
 }
