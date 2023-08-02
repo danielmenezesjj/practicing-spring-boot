@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RepositoryTipoUsuario extends JpaRepository<TiposDeUsuario, Integer> {
     // Outros métodos personalizados, se necessário
+
 }

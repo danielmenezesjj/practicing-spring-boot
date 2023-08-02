@@ -20,15 +20,21 @@ public class Usuarios {
     private String email;
     private String senha;
 
+
     @ManyToOne
-    @JoinColumn(name = "id_tipo_usuario")
+    @JoinColumn(name = "tipo_usuario_id")
     private TiposDeUsuario tiposDeUsuario;
 
-    public Usuarios(UsuarioDTO data) {
 
+    public Usuarios(UsuarioDTO data, TiposDeUsuario tiposDeUsuario) {
         this.email = data.email();
         this.senha = data.senha();
-
-
+        this.tiposDeUsuario = tiposDeUsuario;
     }
+
+//    public Usuarios(String email, String senha, TiposDeUsuario tiposDeUsuario) {
+//        this.email = email;
+//        this.senha = senha;
+//        this.tiposDeUsuario = tiposDeUsuario;
+//    }
 }
