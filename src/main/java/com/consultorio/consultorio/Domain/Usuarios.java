@@ -32,9 +32,15 @@ public class Usuarios {
         this.tiposDeUsuario = tiposDeUsuario;
     }
 
-//    public Usuarios(String email, String senha, TiposDeUsuario tiposDeUsuario) {
-//        this.email = email;
-//        this.senha = senha;
-//        this.tiposDeUsuario = tiposDeUsuario;
-//    }
+    public void updateUser(UsuarioDTO data) {
+        if(data.email() != null){
+            this.email = data.email();
+        }
+        if(data.senha() != null){
+            this.senha = data.senha();
+        }
+        if(data.tipo_usuario_id() != null){
+            this.tiposDeUsuario = tiposDeUsuario;
+        }
+    }
 }

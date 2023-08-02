@@ -33,7 +33,6 @@ public class UsuarioController {
     @PostMapping
     @Transactional
     public ResponseEntity postUser(@RequestBody UsuarioDTO data){
-
         var tipoUser = repositoryTipoUsuario.getReferenceById(data.tipo_usuario_id());
         Optional<TiposDeUsuario> optionalTiposDeUsuario = repositoryTipoUsuario.findById(data.tipo_usuario_id());
         if(optionalTiposDeUsuario.isPresent()){
@@ -44,6 +43,26 @@ public class UsuarioController {
             return ResponseEntity.notFound().build();
         }
 
+    }
+
+    @PutMapping("/{id_usuario}")
+    @Transactional
+    public ResponseEntity putUser(@RequestBody UsuarioDTO data, @PathVariable Integer id_usuario){
+        var user = repository.getReferenceById(id_usuario);
+        user.updateUser(data);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id_usuario}")
+    public ResponseEntity deleteUser(@PathVariable Integer id_usuario){
+        Optional<Usuarios>optionalUsuarios = repository.findById(id_usuario);
+        if(optionalUsuarios.isPresent()){
+            Usuarios usuario = optionalUsuarios.get();
+            repository.delete(usuario);
+            return ResponseEntity.noContent().build();
+        }else{
+            return  ResponseEntity.notFound().build();
+        }
     }
 
 }
