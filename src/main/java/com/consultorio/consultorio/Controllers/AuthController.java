@@ -3,6 +3,7 @@ package com.consultorio.consultorio.Controllers;
 import com.consultorio.consultorio.Domain.Usuarios;
 import com.consultorio.consultorio.Dto.AuthDTO;
 import com.consultorio.consultorio.Repository.RepositoryUsuario;
+import com.consultorio.consultorio.infra.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,13 +26,17 @@ public class AuthController {
     @Autowired
     private RepositoryUsuario repositoryUsuario;
 
+    @Autowired
+    private TokenService tokenService;
 
     @PostMapping("/login")
     @Transactional
     public ResponseEntity auth(@RequestBody AuthDTO dados){
         var token = new UsernamePasswordAuthenticationToken(dados.email(), dados.senha());
         var auth = manager.authenticate(token);
-        return ResponseEntity.ok().build();
+
+        var tokenUser = tokenService.genereteToken((Usuarios) auth.getPrincipal());
+        return ResponseEntity.ok(tokenUser);
     }
 
 //    @PostMapping("/register")

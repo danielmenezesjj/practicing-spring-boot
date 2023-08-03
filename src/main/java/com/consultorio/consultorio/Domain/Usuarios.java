@@ -1,6 +1,7 @@
 package com.consultorio.consultorio.Domain;
 
 import com.consultorio.consultorio.Dto.UsuarioDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -52,18 +54,32 @@ public class Usuarios implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        List<GrantedAuthority> authorities = new ArrayList<>();
+
+        // Adicionar a autoridade "ROLE_USER" como padrão
+//        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+        if (this.tiposDeUsuario != null) {
+            String permissao = this.tiposDeUsuario.getNome();
+            System.out.println(permissao);
+            // Adicionar a permissão aos authorities
+            authorities.add(new SimpleGrantedAuthority(permissao));
+        }
+        return authorities;
     }
+
 
     @Override
     public String getPassword() {
         return senha;
     }
 
+
     @Override
     public String getUsername() {
         return email;
     }
+
 
     @Override
     public boolean isAccountNonExpired() {
