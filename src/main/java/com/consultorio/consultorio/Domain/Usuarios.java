@@ -34,11 +34,13 @@ public class Usuarios implements UserDetails {
     private TiposDeUsuario tiposDeUsuario;
 
 
-    public Usuarios(UsuarioDTO data, TiposDeUsuario tiposDeUsuario) {
-        this.email = data.email();
-        this.senha = data.senha();
+    public Usuarios(String email, String senha ,TiposDeUsuario tiposDeUsuario) {
+        this.email = email;
+        this.senha = senha;
         this.tiposDeUsuario = tiposDeUsuario;
     }
+
+
 
     public void updateUser(UsuarioDTO data) {
         if(data.email() != null){
@@ -57,16 +59,17 @@ public class Usuarios implements UserDetails {
         List<GrantedAuthority> authorities = new ArrayList<>();
 
         // Adicionar a autoridade "ROLE_USER" como padrão
-//        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        // authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
         if (this.tiposDeUsuario != null) {
             String permissao = this.tiposDeUsuario.getNome();
             System.out.println(permissao);
-            // Adicionar a permissão aos authorities
             authorities.add(new SimpleGrantedAuthority(permissao));
         }
+
         return authorities;
     }
+
 
 
     @Override

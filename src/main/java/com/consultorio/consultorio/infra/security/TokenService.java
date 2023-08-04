@@ -40,7 +40,7 @@ public class TokenService {
                     .verify(token)
                     .getSubject();
         }catch(JWTVerificationException exception){
-            return "";
+            return "deu erro aqui nessa porra";
         }
     }
     private Instant genExpirationDate(){
