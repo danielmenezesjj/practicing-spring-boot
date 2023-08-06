@@ -30,6 +30,7 @@ public class SecurityConfigurations {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers(HttpMethod.POST, "/auth/login").permitAll();
+                    req.requestMatchers( "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/usuarios").permitAll();
                     req.requestMatchers(HttpMethod.GET, "/usuarios").hasRole ("tipo_user1");// vc precisa cadastrar a role no banco de dados com tipo ROLE_tipouser1
                     req.anyRequest().authenticated();

@@ -6,6 +6,7 @@ import com.consultorio.consultorio.Domain.Usuarios;
 import com.consultorio.consultorio.Dto.UsuarioDTO;
 import com.consultorio.consultorio.Repository.RepositoryTipoUsuario;
 import com.consultorio.consultorio.Repository.RepositoryUsuario;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/usuarios")
+@SecurityRequirement(name = "bearer-key")
 public class UsuarioController {
 
 
